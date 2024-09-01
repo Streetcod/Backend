@@ -56,7 +56,7 @@ partial class Build
         .DependsOn(CommitMainRepo)
         .Executes(() =>
         {
-            Git("pull");
+            // Git("pull");
         });
 
     Target SetupGit => _ => _
