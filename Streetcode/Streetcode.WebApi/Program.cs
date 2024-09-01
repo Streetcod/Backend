@@ -49,6 +49,8 @@ if (app.Environment.EnvironmentName != "Local")
 
 app.MapControllers();
 
+await app.SeedDataAsync();
+
 app.Run();
 public partial class Program
 {
