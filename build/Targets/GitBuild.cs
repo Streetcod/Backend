@@ -34,22 +34,22 @@ partial class Build
         .Executes(() =>
         {
             //command below can`t work with spaces, we replace them by Unicode Character “⠀” (U+2800)
-            var joinedMessage = string.Join("⠀", Msg.Split(" "));
-            PowerShell($"git submodule foreach 'git add .; git commit -m \"{joinedMessage}\"'");
+            // var joinedMessage = string.Join("⠀", Msg.Split(" "));
+            // PowerShell($"git submodule foreach 'git add .; git commit -m \"{joinedMessage}\"'");
         });
 
     Target UpdateSubmodules => _ => _
         .OnlyWhenStatic(() => WithCli)
         .Executes(() =>
         {
-            Git("submodule update --remote");
+            // Git("submodule update --remote");
         });
 
     Target CheckoutBranch => _ => _
         .OnlyWhenStatic(() => Checkout)
         .Executes(() => 
         { 
-            Git($"checkout {(NewB ? "-b" : string.Empty)} {BName}"); 
+            // Git($"checkout {(NewB ? "-b" : string.Empty)} {BName}");
         });
 
     Target PullBackEnd => _ => _
