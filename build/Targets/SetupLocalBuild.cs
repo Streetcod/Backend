@@ -8,7 +8,7 @@ namespace Targets;
 partial class Build
 {
     Target SetupBackEnd => _ => _
-        .DependsOn(SetLocalEnvironmentVariables,SetupGit);
+        .DependsOn(SetLocalEnvironmentVariables, SetupGit);
 
     Target SetupFrontEnd => _ => _
         .OnlyWhenStatic(() => WithCli)
@@ -17,6 +17,9 @@ partial class Build
         {
             NpmInstall(_ => _
                 .SetProcessWorkingDirectory(ClientDirectory));
+            // NpmStart(_ => _
+            // .SetProcessWorkingDirectory(ClientDirectory));
+
         });
 
     Target SetLocalEnvironmentVariables => _ => _

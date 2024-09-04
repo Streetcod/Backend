@@ -9,7 +9,7 @@ namespace Targets;
 partial class Build
 {
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+    readonly Configuration Configuration = /*IsLocalBuild ? Configuration.Debug :*/ Configuration.Release;
 
     [Solution] readonly Solution Solution;
 
@@ -19,7 +19,7 @@ partial class Build
     AbsolutePath OutputDirectory => RootDirectory / "Output";
     AbsolutePath UnitTestsDirectory => RootDirectory / "Streetcode" / "Streetcode.XUnitTest";
     AbsolutePath IntegrationTestsDirectory => RootDirectory / "Streetcode" / "Streetcode.XIntegrationTest";
-    AbsolutePath ClientDirectory => RootDirectory / "Streetcode" / "Streetcode.Client";
+    AbsolutePath ClientDirectory => (AbsolutePath)"/home/yurtis/Desktop/streetcode-frontend-Seecherr";
     AbsolutePath DbUpdateDirectory => RootDirectory / "Streetcode" / "DbUpdate";
 
     static bool GitHasCleanCopy(AbsolutePath path) =>

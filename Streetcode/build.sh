@@ -28,6 +28,7 @@ function FirstJsonValue {
     perl -nle 'print $1 if m{"'"$1"'": "([^"]+)",?}' <<< "${@:2}"
 }
 
+
 # If dotnet CLI is installed globally and it matches requested version, use for execution
 if [ -x "$(command -v dotnet)" ] != dotnet --version &>/dev/null; then
     export DOTNET_EXE="$(command -v dotnet)"
@@ -60,3 +61,4 @@ echo "Microsoft (R) .NET SDK version $("$DOTNET_EXE" --version)"
 
 "$DOTNET_EXE" build "$BUILD_PROJECT_FILE" /nodeReuse:false /p:UseSharedCompilation=false -nologo -clp:NoSummary --verbosity quiet
 "$DOTNET_EXE" run --project "$BUILD_PROJECT_FILE" --no-build -- "$@"
+"$DOTNET_EXE" "/home/yurtis/Desktop/streetcode-backend-Seecherr/Streetcode/Streetcode.WebApi/bin/Release/net6.0/Streetcode.WebApi.dll"

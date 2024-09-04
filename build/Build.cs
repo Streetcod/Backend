@@ -17,7 +17,7 @@ partial class Build : NukeBuild
     Target Push => _ => _
         .DependsOn(PushAll);
 
-    Target Test => _ => _
-        .DependsOn(UnitTest, IntegrationTest)
-        .Triggers(EndAll);
+    // Target Test => _ => _
+    //     .DependsOn(UnitTest, IntegrationTest)
+    //     .Triggers(EndAll);
 }

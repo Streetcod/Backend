@@ -145,7 +145,6 @@
               "SetupGit",
               "SetupLocal",
               "SetupPublic",
-              "Test",
               "UnitTest",
               "UpdateDatabase",
               "UpdateSubmodules"
@@ -195,7 +194,6 @@
               "SetupGit",
               "SetupLocal",
               "SetupPublic",
-              "Test",
               "UnitTest",
               "UpdateDatabase",
               "UpdateSubmodules"
