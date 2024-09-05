@@ -8,7 +8,7 @@ namespace Targets;
 partial class Build
 {
     Target SetupBackEnd => _ => _
-        .DependsOn(SetLocalEnvironmentVariables, SetupGit);
+        .DependsOn(SetLocalEnvironmentVariables/*, SetupGit*/);
 
     Target SetupFrontEnd => _ => _
         .OnlyWhenStatic(() => WithCli)
