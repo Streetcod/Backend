@@ -21,8 +21,7 @@ public class Program
 
         string pathToScript = "";
 
-        Console.WriteLine("Enter '-m' to MIGRATE or '-s' to SEED db:");
-        pathToScript = Console.ReadLine();
+
 
         pathToScript = migrationPath;
         

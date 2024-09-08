@@ -15,8 +15,8 @@ partial class Build
         .After(SetupBackEnd)
         .Executes(() =>
         {
-            NpmInstall(_ => _
-                .SetProcessWorkingDirectory(ClientDirectory));
+            //NpmInstall(_ => _
+              //  .SetProcessWorkingDirectory(ClientDirectory));
             // NpmStart(_ => _
             // .SetProcessWorkingDirectory(ClientDirectory));
 
@@ -34,7 +34,7 @@ partial class Build
 
     Target SetupLocal => _ => _
         .OnlyWhenStatic(() => !Dockerize)
-        .DependsOn(SetupFrontEnd, UpdateDatabase, SetupBackEnd);
+        .DependsOn( /*SetupFrontEnd,*/ UpdateDatabase, SetupBackEnd);
 
 }
 
