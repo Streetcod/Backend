@@ -33,8 +33,8 @@ namespace Streetcode.WebApi.Extensions
                 string blobPath = app.Configuration.GetValue<string>("Blob:BlobStorePath");
                 var repo = new RepositoryWrapper(dbContext);
                 var blobService = new BlobService(blobOptions, repo);
-                string initialDataImagePath = "../Streetcode/Streetcode.DAL/InitialData/images.json";
-                string initialDataAudioPath = "../Streetcode/Streetcode.DAL/InitialData/audios.json";
+                string initialDataImagePath = "./../Streetcode.DAL/InitialData/images.json";
+                string initialDataAudioPath = "./../Streetcode.DAL/InitialData/audios.json";
                 if (!dbContext.Images.Any())
                 {
                     string imageJson = File.ReadAllText(initialDataImagePath, Encoding.UTF8);
