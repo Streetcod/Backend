@@ -61,4 +61,4 @@ echo "Microsoft (R) .NET SDK version $("$DOTNET_EXE" --version)"
 
 "$DOTNET_EXE" build "$BUILD_PROJECT_FILE" /nodeReuse:false /p:UseSharedCompilation=false -nologo -clp:NoSummary --verbosity quiet
 #"$DOTNET_EXE" run --project "$BUILD_PROJECT_FILE" --no-build -- "$@"
-"$DOTNET_EXE" "/home/yurtis/Desktop/streetcode-backend-Seecherr/Streetcode/Streetcode.WebApi/bin/Release/net6.0/Streetcode.WebApi.dll"
+
