@@ -1,31 +1,35 @@
 name: Build and test
 
 on:
-    push:
-        branches:
-            - main
-    workflow_dispatch:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-    build:
-        runs_on: ubuntu_latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
+  build:
+    runs_on: ubuntu-latest
 
-            - name: Setup dotnet
-              uses: actions/setup-dotnet@v1
-              with:
-                version: 6.0.x
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-            - name: Build the app
-              run: ./Streetcode/build.sh Run
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          version: 6.0.x
 
-            - name: Setup environment for test
-              run: ./Streetcode/build.sh SetupIntegrationTestsEnvironment
+      - name: Give execute permission to build.sh
+        run: chmod +x ./Streetcode/build.sh
 
-            - name: Unit test
-              run: dotnet test ./Streetcode/Streetcode.XUnitTest/Streetcode.XUnitTest.csproj --configuration Release
+      - name: Build the app
+        run: ./Streetcode/build.sh Run
 
-            - name: Integration test
-              run: dotnet test ./Streetcode/Streetcode.XIntegrationTest/Streetcode.XIntegrationTest.csproj --configuration Release
+      - name: Setup environment for test
+        run: ./Streetcode/build.sh SetupIntegrationTestsEnvironment
+
+      - name: Unit test
+        run: dotnet test ./Streetcode/Streetcode.XUnitTest/Streetcode.XUnitTest.csproj --configuration Release
+
+      - name: Integration test
+        run: dotnet test ./Streetcode/Streetcode.XIntegrationTest/Streetcode.XIntegrationTest.csproj --configuration Release
