@@ -19,7 +19,7 @@ COPY ./houses.zip ./
 RUN dotnet restore
 
 COPY ./Streetcode ./
-RUN ls -al
+
 RUN dotnet build -c Debug -o /app/build
 
 FROM build AS publish
@@ -29,7 +29,7 @@ FROM build AS final
 WORKDIR /app
 COPY --from=publish /app/publish ./
 
-RUN ls -al
+
 
 LABEL atom=Streetcode
 CMD ["dotnet", "Streetcode.WebApi.dll"]
