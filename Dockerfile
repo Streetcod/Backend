@@ -19,18 +19,15 @@ COPY ./houses.zip ./
 RUN dotnet restore
 
 COPY ./Streetcode ./
-COPY ./build ./
-RUN ls -al
-RUN dotnet build "Streetcode.WebApi.csproj" -c Release -o /app/build
+RUN dotnet build -c Debug -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Streetcode.WebApi.csproj" -c Release -o /app/publish
+RUN dotnet publish  -c Release -o /app/publish
 
 FROM build AS final
 WORKDIR /app
 COPY --from=publish /app/publish ./
 
 LABEL atom=Streetcode
-CMD /bin/sh -c ""
 
-#CMD ["dotnet", "Streetcode.WebApi.dll"]
+CMD ["dotnet", "Streetcode.WebApi.dll"]
