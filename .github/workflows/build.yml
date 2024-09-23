@@ -1,0 +1,64 @@
+name: Build and test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          version: 6.0.x
+
+      - name: Give execute permission to build.sh
+        run: chmod +x ./Streetcode/build.sh
+
+      - name: Set environmental variables
+        run: |
+            echo "MS_SQL_DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+            echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+            echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+            echo "SA_PASSWORD=${{ secrets.SA_PASSWORD}}" >> $GITHUB_ENV
+
+      - name: Build the app
+        run: ./Streetcode/build.sh Run
+
+      - name: Setup environment for test
+        run: ./Streetcode/build.sh SetupIntegrationTestsEnvironment
+
+      - name: Unit test
+        run: dotnet test ./Streetcode/Streetcode.XUnitTest/Streetcode.XUnitTest.csproj --configuration Release
+
+      - name: Integration test
+        run: dotnet test ./Streetcode/Streetcode.XIntegrationTest/Streetcode.XIntegrationTest.csproj --configuration Release
+        
+  docker-build:
+    if: false
+    runs-on: ubuntu-latest 
+    needs: build
+    steps:
+    - uses: actions/checkout@v3
+      name: Checkout source code
+
+    - name: Setup docker 
+      run: docker build -t yurti/streetcode_back .
+  
+    - name: Login into Dockerhub
+      id: docker-hub
+      env:
+        username: ${{secrets.DOCKERHUB_LOGIN}}
+        password: ${{secrets.DOCKERHUB_PASS}}
+      run: docker login -u $username -p $password   
+
+    - name: Push to dockerhub
+      id: push-docker-image
+      run: docker push yurti/streetcode_back:latest
+      

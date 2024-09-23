@@ -1,10 +1,14 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 
+<<<<<<< HEAD
 RUN apt-get update && apt-get install -y --no-install-recommends     curl     gpg     && rm -rf /var/lib/apt/lists/*
 EXPOSE 5000
 EXPOSE 5001
 EXPOSE 80
+=======
+RUN apt-get update     && apt-get install -y --no-install-recommends     curl     gpg     && rm -rf /var/lib/apt/lists/*
+>>>>>>> refs/remotes/origin/main
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG Configuration=Release
 
@@ -19,7 +23,11 @@ COPY ./houses.zip ./
 RUN dotnet restore
 
 COPY ./Streetcode ./
+<<<<<<< HEAD
 RUN dotnet build -c Release -o /app/build
+=======
+RUN dotnet build -c Debug -o /app/build
+>>>>>>> refs/remotes/origin/main
 
 FROM build AS publish
 RUN dotnet publish  -c Release -o /app/publish
@@ -28,7 +36,13 @@ FROM build AS final
 WORKDIR /app
 COPY --from=publish /app/publish ./
 
+<<<<<<< HEAD
 CMD /bin/sh -c "dotnet Streetcode.WebApi.dll"
 #CMD  "dotnet Streetcode.WebApi.dll"
 
 #CMD ["dotnet", "Streetcode.WebApi.dll"]
+=======
+LABEL atom=Streetcode
+
+CMD ["dotnet", "Streetcode.WebApi.dll"]
+>>>>>>> refs/remotes/origin/main
