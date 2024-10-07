@@ -26,8 +26,8 @@ else
 }
 
 await app.ApplyMigrations();
+await app.SeedDataAsync();
 
-// await app.SeedDataAsync(); // uncomment for seeding data in local
 app.UseCors();
 app.UseHttpsRedirection();
 app.UseRouting();
@@ -48,9 +48,6 @@ if (app.Environment.EnvironmentName != "Local")
 }
 
 app.MapControllers();
-
-await app.SeedDataAsync();
-
 app.Run();
 public partial class Program
 {

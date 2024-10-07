@@ -5,13 +5,13 @@ public class Program
 {
     static int Main(string[] args)
     {
-        string migrationPath = Path.Combine(Directory.GetCurrentDirectory(),
+        string migrationPath = /*"/Streetcode.DAL/Persistence/ScriptsMigration"*/Path.Combine("/"/*Directory.GetCurrentDirectory()*/,
             "Streetcode.DAL", "Persistence", "ScriptsMigration");
 
         var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Local";
 
         var configuration = new ConfigurationBuilder()
-            .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "Streetcode.WebApi"))
+            .SetBasePath("/Streetcode/Streetcode.WebApi"/*Path.Combine(Directory.GetCurrentDirectory(), "/Streetcode/Streetcode.WebApi")*/)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables("STREETCODE_")
@@ -20,9 +20,6 @@ public class Program
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         string pathToScript = "";
-
-	Console.WriteLine("Enter '-m' to MIGRATE or '-s' to SEED db:");
-        pathToScript = Console.ReadLine();
 
         pathToScript = migrationPath;
         
