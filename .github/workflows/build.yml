@@ -21,15 +21,8 @@ jobs:
       - name: Give execute permission to build.sh
         run: chmod +x ./Streetcode/build.sh
 
-      - name: Set environmental variables
-        run: |
-            echo "MS_SQL_DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
-            echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
-            echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
-            echo "SA_PASSWORD=${{ secrets.SA_PASSWORD}}" >> $GITHUB_ENV
-
       - name: Build the app
-        run: ./Streetcode/build.sh
+        run: ./Streetcode/build.sh Run
 
       - name: Setup environment for test
         run: ./Streetcode/build.sh SetupIntegrationTestsEnvironment
